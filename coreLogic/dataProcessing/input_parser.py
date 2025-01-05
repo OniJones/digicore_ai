@@ -46,3 +46,40 @@ Returns:
 def normalize_input(user_input):
     user_input = ' '.join(user_input().strip().lower().split()) # Remove extra spaces
     return user_input if user_input else None
+
+
+
+
+
+
+"""
+====================================================================================
+Command Parsing
+
+Adding a command parser helps determine the intent behind the user's input.
+====================================================================================
+"""
+
+def parse_command(normalized_input):
+    if normalize_input.startswith("create digimon"):
+        return "CREATE_DIGIMON", normalized_input[14:] # Extract Digimon Name
+    elif normalized_input.startswith("search"):
+        return "SEARCH", normalized_input[7:]
+    elif normalized_input == "help":
+        return "HELP", None
+    else:
+        return "UNKNOWN", None
+    
+
+
+
+"""
+======================================================================
+Error Handling
+
+When a command is unknown or incomplete, guide the user toward valid inputs.
+======================================================================
+"""
+
+def handle_invalid_command(command):
+    print(f"'{command} is not recognized. Try 'help' for available commands.")
